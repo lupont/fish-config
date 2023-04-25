@@ -69,10 +69,12 @@ function fish_mode_prompt --description 'Write out the prompt'
             set suffix '$'
     end
 
-    # PWD
-    set_color be5f5f #949494 #dbb400 #ffd600 #blue #$color_cwd
+    if [ -n "$SSH_CONNECTION" ]
+        set_color 5fbe5f
+    else
+        set_color be5f5f
+    end
     echo -n (basename (prompt_pwd))
-    # echo -n (prompt_pwd)
     set_color normal
 
     printf '%s ' (fish_vcs_prompt)
