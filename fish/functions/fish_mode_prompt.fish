@@ -70,6 +70,15 @@ function fish_mode_prompt --description 'Write out the prompt'
     end
 
     if [ -n "$SSH_CONNECTION" ]
+        set_color 444444
+        if command -v hostname >/dev/null
+            set -l host "$(hostname)"
+        else if command -v hostnamectl >/dev/null
+            set -l host "$(hostnamectl --static)"
+        else
+            set -l host "<ssh>"
+        end
+        printf '[%s] ' "$host"
         set_color 5fbe5f
     else
         set_color be5f5f
