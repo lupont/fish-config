@@ -80,6 +80,10 @@ function fish_mode_prompt --description 'Write out the prompt'
         end
         printf '[%s] ' "$host"
         set_color 5fbe5f
+    else if [ -n "$DEV_CONTAINER" ]
+        set_color 444444
+        printf '[%s] ' "$DEV_CONTAINER"
+        set_color 5f5fbe
     else
         set_color be5f5f
     end
