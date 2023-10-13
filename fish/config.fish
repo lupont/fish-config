@@ -21,5 +21,5 @@ set -x LANG en_US.UTF-8
 set -x COLORTERM truecolor
 set -x EDITOR nvim
 set -x PAGER 'less --mouse'
-set -x FZF_DEFAULT_COMMAND "fd -H --type f -E '**/.git/*' -E '*.o' -E '**/target/*' -E '**/node_modules/*' -E '**/*.class' -E '**/bin/*'"
+set -x FZF_DEFAULT_COMMAND "find -type f -not -path '*/.git/*' -not -path '*/target/*'"
 set -x FZF_DEFAULT_OPTS '--reverse'
