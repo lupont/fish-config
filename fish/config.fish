@@ -8,12 +8,9 @@ bind -M insert \co fcf
 alias ls='ls --group-directories-first'
 
 function fcf
-    set -l folders "$(find -L "$HOME" -maxdepth 2)"
-    set -l folder (echo "$folders" | fzf --height '40%')
-
-    [ -z "$folder" ] && commandline -f repaint && return
-
-    cd "$folder"
+    set -l dirs "$(eval $FZF_DEFAULT_CD_COMMAND)"
+    set -l dir "$(echo "$dirs" | fzf --height '40%')"
+    [ -d "$dir" ] && cd "$dir"
     commandline -f repaint
 end
 
@@ -22,4 +19,5 @@ set -x COLORTERM truecolor
 set -x EDITOR nvim
 set -x PAGER 'less --mouse'
 set -x FZF_DEFAULT_COMMAND "find -type f -not -path '*/.git/*' -not -path '*/target/*'"
+set -x FZF_DEFAULT_CD_COMMAND "find -type d -not -path '*/.git/*' -not -path '*/target/*'"
 set -x FZF_DEFAULT_OPTS '--reverse'
